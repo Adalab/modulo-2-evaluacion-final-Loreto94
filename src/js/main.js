@@ -9,7 +9,10 @@ console.log('>> Ready :)');
        > Por cada elemento de mi lista de series, la pinto en mi html. */
 
 //Seleccionar lista vacía de mi html
-const List = document.querySelector(".js-list");
+const List = document.querySelector(".js_list");
+const searchButton = document.querySelector(".js_searchButton");
+const Input = document.querySelector(".js_input");
+
 
 //Petición al servidor
 fetch("https://api.jikan.moe/v4/anime?q=naruto")
@@ -20,19 +23,24 @@ fetch("https://api.jikan.moe/v4/anime?q=naruto")
         const series = data.data;
         console.log(series[0]);
     //Pintar las series
-    const renderCardSeries = (ev)=>{
-        for (const serie of series){
-            List.innerHTML += `
+
+    function renderCardSeries(series) {
+        for (serie of series){
+            let content = ""
+            content += `
                 <li>
                     <div class="serie-card">
                         <img src="${serie.images.jpg.image_url}" alt="${serie.title}">
                     </div>
                     <h2>${serie.title}</h2>
                 </li>`;
+            
+            List.innerHTML += content;
         }
-    renderCardSeries(ev);
+        renderCardSeries(series);
 
     }
+
     })
         
     
