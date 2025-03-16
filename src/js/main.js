@@ -2,39 +2,66 @@
 
 console.log('>> Ready :)');
 
-const Input = document.querySelector(".js_input");
-//const inputText = Input.value;
+const inputText = Input.value;
 const searchButton = document.querySelector(".js_searchBttn");
 const results = document.querySelector(".js_results");
 
 const fetchSeries = (event) => {
     event.preventDefault();
-    const url = "https://api.jikan.moe/v4/anime?q=naruto";
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            const seriesAnime = data.data;
-            if (inputText != "") {
-                for (serie of seriesAnime) {
-                    const inputText = Input.value;
-                    let content = "";
-                    content = `
+    const inputText = Input.value; 
+    if (inputText != "") {
+        const url = `https://api.jikan.moe/v4/anime?q=${inputText}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const seriesAnime = data.data;
+                let content = ""; 
+                for (let serie of seriesAnime) {
+                    content += `
                     <li>
-                        <div> <img src="${serie.images.jpg.image_url}" alt="${serie.title}" </div>
+                        <div> <img src="${serie.images.jpg.image_url}" alt="${serie.title}" /> </div>
                         <h2>${serie.title}</h2>
-                    </li>`
-                    
+                    </li>`;
                 }
-                results += content;
-            } else {
-                alert ("Aquí puedes introducir tu búsqueda.");
-            }
+                results.innerHTML = content; 
+            })
             
-        })
-searchButton.addEventListener("click", fetchSeries);
-console.log("Ha hecho click");
-
+    } else {
+        alert("Aquí puedes introducir tu búsqueda.");
+    }
 }
 
-     
+searchButton.addEventListener("click", fetchSeries);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
