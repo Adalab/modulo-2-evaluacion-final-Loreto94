@@ -2,55 +2,39 @@
 
 console.log('>> Ready :)');
 
-/*1. Pintar la lista de series con la información del servidor:
-     - Seleccionar la lista vacía de mi html.
-     - Petición al servidor (fetch):
-       > Guardar las series que me envía el servidor.
-       > Por cada elemento de mi lista de series, la pinto en mi html. */
-
-//Seleccionar lista vacía de mi html
-const List = document.querySelector(".js_list");
-const searchButton = document.querySelector(".js_searchButton");
 const Input = document.querySelector(".js_input");
+//const inputText = Input.value;
+const searchButton = document.querySelector(".js_searchBttn");
+const results = document.querySelector(".js_results");
 
-
-//Petición al servidor
-fetch("https://api.jikan.moe/v4/anime?q=naruto")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    //Guardar las series
-        const series = data.data;
-        console.log(series[0]);
-    //Pintar las series
-
-    function renderCardSeries(series) {
-        for (serie of series){
-            let content = ""
-            content += `
-                <li>
-                    <div class="serie-card">
-                        <img src="${serie.images.jpg.image_url}" alt="${serie.title}">
-                    </div>
-                    <h2>${serie.title}</h2>
-                </li>`;
+const fetchSeries = (event) => {
+    event.preventDefault();
+    const url = "https://api.jikan.moe/v4/anime?q=naruto";
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const seriesAnime = data.data;
+            if (inputText != "") {
+                for (serie of seriesAnime) {
+                    const inputText = Input.value;
+                    let content = "";
+                    content = `
+                    <li>
+                        <div> <img src="${serie.images.jpg.image_url}" alt="${serie.title}" </div>
+                        <h2>${serie.title}</h2>
+                    </li>`
+                    
+                }
+                results += content;
+            } else {
+                alert ("Aquí puedes introducir tu búsqueda.");
+            }
             
-            List.innerHTML += content;
-        }
-        renderCardSeries(series);
+        })
+searchButton.addEventListener("click", fetchSeries);
+console.log("Ha hecho click");
 
-    }
+}
 
-    })
-        
-    
-        
-    
-
-
-
-
-
-
-//2. Filtrar series con el buscador
-//3. Anadir series como favoritas y guardar en el Local Storage
+     
