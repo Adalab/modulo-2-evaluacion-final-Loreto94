@@ -1,6 +1,10 @@
-console.log(">> Ready :)");const l=document.querySelector(".js_input");l.value;const u=document.querySelector(".js_searchBttn"),c=document.querySelector(".js_results");let o=[];const d=i=>{i.preventDefault();const n=l.value;if(n!=""){const s=`https://api.jikan.moe/v4/anime?q=${n}`;fetch(s).then(e=>e.json()).then(e=>{console.log(e),o=e.data;let r="";for(let t of o)r+=`
-                    <li class="js_serie" id=${t.mal_id}>
-                        <div> <img src="${t.images.jpg.image_url}" alt="${t.title}" /> </div>
-                        <h2>${t.title}</h2>
-                    </li>`;c.innerHTML=r;const a=document.querySelectorAll(".js_serie");for(const t of a)t.addEventListener("click",m)})}else n===""&&(c.innerHTML="")};u.addEventListener("click",d);function m(i){console.log("Ha hecho click en una serie favorita"),console.log(i.currentTarget.id);const n=i.currentTarget.id,s=o.find(e=>e.mal_id===n);console.log(s)}
+console.log(">> Ready :)");const d=document.querySelector(".js_input");d.value;const m=document.querySelector(".js_searchBttn"),r=document.querySelector(".js_results");let c=[],l=[],a=document.querySelector(".js_favorites");const v=o=>{o.preventDefault();const t=d.value;if(t!=""){const s=`https://api.jikan.moe/v4/anime?q=${t}`;fetch(s).then(i=>i.json()).then(i=>{console.log(i),l=i.data;let e="";for(let n of l)e+=`
+                    <li class="js_serie" id=${n.mal_id}>
+                        <div> <img src="${n.images.jpg.image_url}" alt="${n.title}" /> </div>
+                        <h2>${n.title}</h2>
+                    </li>`;r.innerHTML=e;const u=document.querySelectorAll(".js_serie");for(const n of u)n.addEventListener("click",g)})}else t===""&&(r.innerHTML="")};m.addEventListener("click",v);function g(o){console.log("Ha hecho click en una serie favorita"),console.log(o.currentTarget.id);const t=o.currentTarget.id;console.log(l);const s=l.find(e=>(console.log(e.mal_id),console.log(e),console.log(t),e.mal_id===parseInt(t)));console.log(s),c.push(s);function i(){a.innerHTML="";for(serie of c){let e=`
+                    <li class="js_serie" id=${serie.mal_id}>
+                        <div> <img src="${serie.images.jpg.image_url}" alt="${serie.title}" /> </div>
+                        <h2>${serie.title}</h2>
+                    </li>`;a.innerHTML+=e}}serieAnimeFav.addEventListener("clik",i)}
 //# sourceMappingURL=main.js.map
