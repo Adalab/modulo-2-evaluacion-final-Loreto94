@@ -59,20 +59,11 @@ function handleAddFavorite(event) {
 
     favorites.push(serieAnimeSelected); //Añado elementos al nuevo Array
     
-    function handleAddFavorite () {
-        sectionFavoritesHTML.innerHTML = "";
-            for (serie of favorites) {
-                let content = `
-                    <li class="js_serie" id=${serie.mal_id}>
-                        <div> <img src="${serie.images.jpg.image_url}" alt="${serie.title}" /> </div>
-                        <h2>${serie.title}</h2>
-                    </li>`;
-        sectionFavoritesHTML.innerHTML += content;
     }
-}
+
     
-serieAnimeFav.addEventListener("clik", handleAddFavorite);
-}
+
+
 
 
 
